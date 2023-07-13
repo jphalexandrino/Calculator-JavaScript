@@ -1,0 +1,269 @@
+<html>
+<head>
+	<!-- tag para colocar os dados de configuração isto é tags meta, css, js, ...-->
+	<meta charset="utf-8">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+	<style type="text/css">
+		.btn-block40{
+			width: 45px; 
+		}
+		.btn-block30{
+			width: 27px; 
+			font-size: 4px;
+			font-weight: bold;
+			
+		}
+	</style>
+
+</head>
+<script language="JavaScript">
+	let operators = ["+","-","*","/"];
+	function soma(n1,n2){
+		return n1+n2;
+	}
+	function backSpace(){
+		let conteudoAtual = document.getElementById('display').value; //pegamos o valor atual
+		document.getElementById('display').value = conteudoAtual.substring(0,conteudoAtual.length-1); //vamos tirar o ultimo 
+		//o substring recebe 3 parametros
+		// "feevale".substring(0,3); fee
+		// "feevale".substring(0,6); feeval
+		// 9=="9" true
+		// 9=='9' true
+		// 9==9 true
+		// 9==="9" false
+		// 9==='9' false
+		// 9===9 true
+	}	
+	function insert(n){
+		let conteudoAtual = document.getElementById('display').value; //pegamos o valor antigo e concatenamos com o clicado
+		var lastChar = conteudoAtual.substring(conteudoAtual.length-1,conteudoAtual.length);
+		console.log("->"+lastChar);
+		if ((operators.indexOf(lastChar) != -1) && (operators.indexOf(n) != -1)){
+			conteudoAtual = conteudoAtual.substring(0,conteudoAtual.length-1);
+			console.log("ENTROU");
+		}
+		document.getElementById('display').value = conteudoAtual + n; //no n temos o valor clicado
+	}
+	function calcular(){
+		let conteudoAtual = document.getElementById('display').value; 
+		document.getElementById('display').value = eval(conteudoAtual);
+		document.getElementById('historico').value += conteudoAtual;
+		document.getElementById('historico').value += "=";
+		document.getElementById('historico').value += eval(conteudoAtual);
+		document.getElementById('historico').value += "\n";	
+	}
+	function limpaTudo(){
+		document.getElementById('display').value = "";
+	}
+	function inverte(tam){
+		let conteudoAtual = document.getElementById('display').value;
+		console.log(conteudoAtual.substring(0,1));
+		if(conteudoAtual.substring(0,1)=="-"){
+			document.getElementById('display').value = conteudoAtual.substring(1,tam);
+		}else{
+			document.getElementById('display').value = "-"+document.getElementById('display').value;
+		}	
+	}
+	function raiz(){
+		let result = Math.sqrt(eval(document.getElementById('display').value));
+		document.getElementById('display').value = result;
+	}
+	function elevado(){
+		let result = Math.pow(eval(document.getElementById('display').value),2);
+		document.getElementById('display').value = result;
+	}
+	function sobx(){
+		let result = 1/document.getElementById('display').value;
+		document.getElementById('display').value = result;
+	}
+	function insertPonto(){
+		let conteudoAtual = document.getElementById('display').value;
+		if(conteudoAtual.includes(".")){
+		console.log("descartando ");
+			return;
+		}else{
+			document.getElementById('display').value = conteudoAtual+"."
+		}
+	}
+	function percentual(){
+		let valor = document.getElementById('display').value;
+		console.log(valor);
+		if (valor.includes("+")){
+			valores = valor.split("+");
+			let percent = valores[0]*valores[1]/100;
+			let resultado = eval(valores[0])+percent;
+			document.getElementById('display').value=resultado;
+		}
+		if(valor.includes("-")){
+			valores = valor.split("-");
+			let percent = valores[0]*valores[1]/100;
+			let resultado = eval(valores[0])-percent;
+			document.getElementById('display').value=resultado;
+		}
+		if(valor.includes("/")){
+			valores = valor.split("/");
+			let percent = valores[0]*valores[1]/100;
+			let resultado = eval(valores[0])/percent;
+			document.getElementById('display').value=resultado;
+		}
+		if(valor.includes("*")){
+			valores = valor.split("*");
+			let percent = valores[0]*valores[1]/100;
+			let resultado = eval(valores[0])*percent;
+			document.getElementById('display').value=resultado;
+		}	
+	}
+	function limpaUltimo(){
+		let digitado = document.getElementById("display").value;
+		let ondeTemOp = existeOperacao(digitado);
+		if(ondeTemOp>0){
+			let vaiFicar = digitado.substring(0,(ondeTemOp+1));
+			console.log(vaiFicar);
+			document.getElementById("display").value = vaiFicar ;
+		}else{
+			limpaTudo();
+		}
+	}
+	function existeOperacao(valor ){
+		let operacoes = ["+","-","*","/"];
+		for(i=0;i<valor.length;i++){
+			//console.log(valor.substring(i,i+1));
+			console.log(valor.substring(valor.length-1-i,valor.length-i));
+			if(operacoes.includes(valor.substring(valor.length-1-i,valor.length-i))){
+				console.log("Temos na posição "+(valor.length-1-i));
+				return (valor.length-1-i);
+			}
+		}
+		return 0;
+	}
+	function memoryStorage(){
+		let valor = document.getElementById('display').value;
+		document.getElementById('memoria').value = valor;
+		document.getElementById('memoriaModal').innerHTML = valor;
+		document.getElementById('mc').disabled = false;
+		document.getElementById('mr').disabled = false;
+		document.getElementById('mb').disabled = false;
+	}
+	function memoryClear(){
+		document.getElementById('mc').disabled = true;
+		document.getElementById('mr').disabled = true;
+		document.getElementById('mb').disabled = true;
+		document.getElementById('memoria').value = "";
+	}
+	function memoryRead(){
+		let mem = document.getElementById('memoria').value;
+		document.getElementById('display').value = mem;
+	}
+	function memorySomar(op){
+		let valor = document.getElementById('display').value;
+		let mem = document.getElementById('memoria').value;
+		let resultado;
+		if(op=='+'){
+			resultado = eval(valor)+eval(mem);
+			document.getElementById('memoria').value = resultado;
+			document.getElementById('memoriaModal').innerHTML = resultado;	
+		}
+		if(op=='-'){
+			resultado = eval(mem-valor);
+			document.getElementById('memoria').value = resultado;
+			document.getElementById('memoriaModal').innerHTML = resultado;
+		}
+	}
+	
+</script>
+<body>
+	<input type="hidden" id="memoria">
+	
+	<div class="container">
+	
+	<!-- Modal -->
+	  <div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+		
+		  <!-- Modal content-->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">Memória</h4>
+			</div>
+			<div class="modal-body">
+			  <p id="memoriaModal"></p>
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		  </div>
+		  
+		</div>
+	  </div>
+	
+		<table border="0">
+			<tr>
+				<td colspan="4"><input type="text" class="form-control" placeholder="0" id="display" size="10"></td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<input type="button" class="btn btn-secondary btn-block30" value="MC" disabled id="mc" onclick="memoryClear()">
+					<input type="button" class="btn btn-secondary btn-block30" value="MR" disabled id="mr" onclick="memoryRead()">
+					<input type="button" class="btn btn-secondary btn-block30" value="M+" onclick="memorySomar('+')">
+					<input type="button" class="btn btn-secondary btn-block30" value="M-" onclick="memorySomar('-')">
+					<input type="button" class="btn btn-secondary btn-block30" value="MS" onclick="memoryStorage()" >
+					<input type="button" class="btn btn-secondary btn-block30" value="M&#8650;" disabled id="mb" data-toggle="modal" data-target="#myModal">
+				</td>
+			</tr>
+			<tr>
+				<td><input type="button" class="btn btn-warning btn-block40" value="%" onclick="percentual()"></td>
+				<td><input type="button" class="btn btn-danger btn-block40" value="CE" onclick="limpaUltimo()"></td>
+				<td><input type="button" class="btn btn-danger btn-block40" value="C" onclick="limpaTudo()"></td>
+				<td><input type="button" class="btn btn-danger btn-block40" value="<" onclick="backSpace()"></td>
+			</tr>
+			<tr>
+				<td><input type="button" class="btn btn-info botao btn-block40" value="⅟"  onclick="sobx()"></td>
+				<td><input type="button" class="btn btn-info botao btn-block40" value="x²" onclick="elevado()"></td>
+				<td><input type="button" class="btn btn-info botao btn-block40" value="&#8730;" onclick="raiz()"></td>
+				<td><input type="button" class="btn btn-warning btn-block40" value="/" onclick="insert(this.value)"></td>
+			</tr>
+			<tr>
+				<td><input type="button" class="btn btn-primary btn-block40" value="7" onclick="insert(this.value)"></td>
+				<td><input type="button" class="btn btn-primary btn-block40" value="8" onclick="insert(this.value)"></td>
+				<td><input type="button" class="btn btn-primary btn-block40" value="9" onclick="insert(this.value)"></td>
+				<td><input type="button" class="btn btn-warning btn-block40" value="*" onclick="insert(this.value)"></td>
+			</tr>
+			<tr>
+				<td><input type="button" class="btn btn-primary btn-block40" value="4" onclick="insert(this.value)"></td>
+				<td><input type="button" class="btn btn-primary btn-block40" value="5" onclick="insert(this.value)"></td>
+				<td><input type="button" class="btn btn-primary btn-block40" value="6" onclick="insert(this.value)"></td>
+				<td><input type="button" class="btn btn-warning btn-block40" value="-" onclick="insert(this.value)"></td>
+			</tr>
+			<tr>
+				<td><input type="button" class="btn btn-primary btn-block40" value="1" onclick="insert(this.value)"></td>
+				<td><input type="button" class="btn btn-primary btn-block40" value="2" onclick="insert(this.value)"></td>
+				<td><input type="button" class="btn btn-primary btn-block40" value="3" onclick="insert(this.value)"></td>
+				<td><input type="button" class="btn btn-warning btn-block40" value="+" onclick="insert(this.value)"></td>
+			</tr>
+				<tr>
+				<td><input type="button" class="btn btn-warning btn-block40" value="+/-" onclick="inverte(document.getElementById('display').value.length)"></td>
+				<td><input type="button" class="btn btn-primary btn-block40" value="0" onclick="insert(this.value)"></td>
+				<td><input type="button" class="btn btn-dark btn-block40" value="," onclick="insertPonto()"></td>
+				<td><input type="button" class="btn btn-success btn-block40" value="=" onclick="calcular()"></td>
+			</tr>
+			<tr>
+				<td colspan="4"><textarea class="form-control" id="historico" rows="6" readonly></textarea></td>	
+			</tr>
+		</table>
+	
+	</div>
+	
+	<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  
+</body>
+</html>
