@@ -1,6 +1,6 @@
 # Calculadora
 
-![Calculadora](link_imagem_da_calculadora.png)
+!Calculadora
 
 Este repositório contém o código fonte da calculadora desenvolvida durante o itinerário da [Feevale](https://www.feevale.br/) com o professor **Marcelo Telles**.
 
