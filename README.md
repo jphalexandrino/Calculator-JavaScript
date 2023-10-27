@@ -2,7 +2,7 @@
 
 !Calculadora
 
-Este repositório contém o código fonte da calculadora desenvolvida durante o itinerário da [Feevale](https://www.feevale.br/) com o professor **@marcelot**.
+Este repositório contém o código fonte da calculadora desenvolvida durante o itinerário da [Feevale](https://www.feevale.br/) com o professor **@Marcelot**.
 
 - [Link da Calculadora Online](https://calculadora-sondercs.vercel.app/)
 
