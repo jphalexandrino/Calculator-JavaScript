@@ -1,40 +1,40 @@
-# Calculadora
+# Calculator
 
-!Calculadora
+!Calculator
 
-Este repositório contém o código fonte da calculadora desenvolvida durante o itinerário da [Feevale](https://www.feevale.br/) com o professor **@Marcelot**.
+This repository contains the source code of the calculator developed during the itinerary at [Feevale](https://www.feevale.br/) with Professor **@Marcelot**.
 
-- [Link da Calculadora Online](https://calculadora-sondercs.vercel.app/)
+- [Online Calculator Link](https://calculadora-sondercs.vercel.app/)
 
-A calculadora é implementada utilizando **JavaScript**, **HTML** e estilizada com **CSS**, fazendo uso do framework **Bootstrap**.
+The calculator is implemented using **JavaScript**, **HTML**, and styled with **CSS**, utilizing the **Bootstrap** framework.
 
-## Índice
+## Table of Contents
 
-- [Descrição](#descrição)
-- [Tecnologias](#tecnologias)
-- [Instruções de Uso](#instruções-de-uso)
-- [Contribuição](#contribuição)
-- [Licença](#licença)
+- [Description](#description)
+- [Technologies](#technologies)
+- [Usage Instructions](#usage-instructions)
+- [Contribution](#contribution)
+- [License](#license)
 
-## Descrição
+## Description
 
-Esta calculadora foi desenvolvida como parte do itinerário da Feevale e sob a orientação do professor Marcelo Telles. Ela está disponível online para uso e também pode ser clonada e executada localmente.
+This calculator was developed as part of the Feevale itinerary under the guidance of Professor Marcelo Telles. It is available online for use and can also be cloned and run locally.
 
-## Tecnologias
+## Technologies
 
 - **JavaScript**
 - **HTML**
 - **CSS**
 - **Bootstrap**
 
-## Instruções de Uso
+## Usage Instructions
 
-Para usar a calculadora online, basta acessar o [Link da Calculadora Online](https://calculadora-sondercs.vercel.app/).
+To use the online calculator, simply access the [Online Calculator Link](https://calculadora-sondercs.vercel.app/).
 
-Se preferir executá-la localmente, siga estas etapas:
+If you prefer to run it locally, follow these steps:
 
-1. Clone este repositório:
+1. Clone this repository:
 
    ```bash
-   git clone https://github.com/seu-usuario/calculadora.git
-   cd calculadora
+   git clone https://github.com/your-username/calculator.git
+   cd calculator
