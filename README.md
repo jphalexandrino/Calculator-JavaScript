@@ -36,5 +36,5 @@ If you prefer to run it locally, follow these steps:
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/your-username/calculator.git
+   git clone https://github.com/sondercs/calculator.git
    cd calculator
